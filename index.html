@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>zkVerify Proof Demo</title>
+  <script src="https://cdn.jsdelivr.net/npm/@zkverify/client@latest"></script>
+</head>
+<body style="font-family: sans-serif; text-align: center; padding-top: 50px;">
+  <h1>zkVerify Proof Verification</h1>
+  <button onclick="verifyProof()" style="padding: 10px 20px; font-size: 16px;">Verify Proof</button>
+  <p id="result" style="margin-top: 20px; font-weight: bold;"></p>
+
+  <script>
+    async function verifyProof() {
+      document.getElementById('result').innerText = 'Verifying...';
+      try {
+        const dummyProof = {
+          proof: '0x123abc',
+          publicSignals: [1, 2, 3],
+          protocol: 'groth16',
+          curve: 'bn128'
+        };
+        const result = await window.zkverify.verifyProof(dummyProof);
+        document.getElementById('result').innerText = 'Verification Result: ' + JSON.stringify(result);
+      } catch (err) {
+        console.error(err);
+        document.getElementById('result').innerText = 'Verification failed (expected in demo).';
+      }
+    }
+  </script>
+</body>
+</html>
